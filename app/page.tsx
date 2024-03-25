@@ -19,6 +19,8 @@ const Page = () => {
       .setLabels()
       .getValue()
 
+    console.log(workbook)
+
     setTransactions(workbook)
   }
 

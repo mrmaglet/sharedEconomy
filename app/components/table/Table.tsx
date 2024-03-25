@@ -16,7 +16,7 @@ const Table = ({ headline, transactions, labels }: Props) => {
 
       <TableWrapper>
         {transactions.map((row: Transaction) => {
-          if (row.accountable === labels) {
+          if (row.labels === labels) {
             return (
               <RowWrapper key={`${row.date}${row.description}${row.amount}`}>
                 <Row column="firstCol">{row.date}</Row>

@@ -6,5 +6,5 @@ export type Transaction = {
   date: string
   description: string
   amount: number
-  accountable: Labels
+  labels: Labels
 }

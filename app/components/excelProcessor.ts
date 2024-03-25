@@ -21,7 +21,7 @@ function processExcelFile(file: ArrayBuffer) {
   }
 
   function createColumns(this: any) {
-    value.map((transfer: any) => {
+    value = value.map((transfer: any) => {
       return {
         date: transfer[0],
         card: transfer[1],
@@ -34,16 +34,17 @@ function processExcelFile(file: ArrayBuffer) {
   }
 
   function setLabels(this: any) {
-    value.map((format: any) => {
+    value = value.map((format: any) => {
       let labels = ""
 
-      if (format.description.startsWith("CRV*")) labels = "Magnus privat" as Labels
+      if (format?.description?.startsWith("CRV*")) labels = "Magnus privat" as Labels
       else if (format.card === "Extrakort") labels = "Dela Ani" as Labels
       else if (format.card === "Huvudkort") labels = "Dela Magnus" as Labels
 
       return { ...format, labels }
     })
 
+    console.log(value)
     return this
   }
 
