@@ -1,5 +1,5 @@
 interface Props {
-  callback: (data: string | ArrayBuffer | null | undefined) => void
+  callback: (data: ArrayBuffer) => void
 }
 
 const DropZone = ({ callback }: Props) => {
@@ -17,7 +17,7 @@ const DropZone = ({ callback }: Props) => {
 
       const file = e.target.result
 
-      callback(file)
+      if (file.constructor === ArrayBuffer) callback(file) //
     }
 
     reader.onerror = function (e: ProgressEvent<FileReader>) {

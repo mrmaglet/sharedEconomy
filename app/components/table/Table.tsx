@@ -1,4 +1,4 @@
-import { Transaction, Accountable } from "@/types/types"
+import { Labels, Transaction } from "@/types/types"
 import { Row } from "./Row"
 import { RowWrapper } from "./RowWrapper"
 import { TableWrapper } from "./TableWrapper"
@@ -6,17 +6,17 @@ import { TableWrapper } from "./TableWrapper"
 interface Props {
   headline?: string
   transactions: Transaction[]
-  accountable: Accountable
+  labels: Labels
 }
 
-const Table = ({ headline, transactions, accountable }: Props) => {
+const Table = ({ headline, transactions, labels }: Props) => {
   return (
     <>
       {headline && <h2>{headline}</h2>}
 
       <TableWrapper>
         {transactions.map((row: Transaction) => {
-          if (row.accountable === accountable) {
+          if (row.accountable === labels) {
             return (
               <RowWrapper key={`${row.date}${row.description}${row.amount}`}>
                 <Row column="firstCol">{row.date}</Row>
