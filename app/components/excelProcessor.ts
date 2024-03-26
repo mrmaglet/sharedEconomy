@@ -34,17 +34,18 @@ function processExcelFile(file: ArrayBuffer) {
   }
 
   function setLabels(this: any) {
-    value = value.map((format: any) => {
-      let labels = ""
+    value = value
+      .map((format: any) => {
+        let labels = ""
 
-      if (format?.description?.startsWith("CRV*")) labels = "Magnus privat" as Labels
-      else if (format.card === "Extrakort") labels = "Dela Ani" as Labels
-      else if (format.card === "Huvudkort") labels = "Dela Magnus" as Labels
+        if (format?.description?.startsWith("CRV*")) labels = "Magnus privat" as Labels
+        else if (format.card === "Extrakort") labels = "Dela Ani" as Labels
+        else if (format.card === "Huvudkort") labels = "Dela Magnus" as Labels
 
-      return { ...format, labels }
-    })
+        return { ...format, labels }
+      })
+      .filter((format: any) => format.labels)
 
-    console.log(value)
     return this
   }
 

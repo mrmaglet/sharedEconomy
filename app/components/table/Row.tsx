@@ -6,10 +6,10 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Row = ({ children, column }: PropsWithChildren<Props>) => {
-  const styleMap: Record<string, CSSProperties> = {
-    first: { flex: "0 0 auto" },
-    second: { flex: "1 0 auto", textAlign: "left" },
-    third: { flex: "1 0 auto", textAlign: "right" },
+  const styleMap: Record<Col, CSSProperties> = {
+    firstCol: { flex: "0 0 auto" },
+    secondCol: { flex: "1 0 auto", textAlign: "left" },
+    thirdCol: { flex: "1 0 auto", textAlign: "right" },
   }
 
   return <div style={{ ...styleMap[column] }}>{children}</div>
