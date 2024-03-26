@@ -5,13 +5,14 @@ import { atom, useAtom } from "jotai"
 import { DropZone } from "./components/drop-zone/DropZone"
 import { Table } from "./components/table/Table"
 import { processExcelFile } from "./components/excelProcessor"
+import { Total } from "./components/table/Total"
 
 const transactionsAtom = atom<Transaction[]>([])
 
 const Page = () => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
 
-  const onCallback = (data: ArrayBuffer) => {
+  const onFileDropped = (data: ArrayBuffer) => {
     const workbook = processExcelFile(data)
       .getFirstSheet()
       .stripFirstNrRows(5)
@@ -19,24 +20,28 @@ const Page = () => {
       .setLabels()
       .getValue()
 
-    console.log(workbook)
-
     setTransactions(workbook)
   }
 
   return (
     <>
-      <DropZone callback={onCallback} />
+      <DropZone callback={onFileDropped} />
 
-      {transactions?.length > 0 && (
-        <div>
-          <Table headline={"Ani Extrakort"} transactions={transactions} labels={"Dela Ani"} />
+      <div style={{ width: "fit-content" }}>
+        {transactions?.length > 0 && (
+          <div>
+            <Table headline={"Ani Extrakort"} transactions={transactions} labels={"Dela Ani"} />
 
-          <Table headline="Magnus Huvudkort" transactions={transactions} labels={"Dela Magnus"} />
+            <Table headline="Magnus Huvudkort" transactions={transactions} labels={"Dela Magnus"} />
 
-          <Table headline="Magnus privat" transactions={transactions} labels={"Magnus privat"} />
-        </div>
-      )}
+            <Table headline="Magnus privat" transactions={transactions} labels={"Magnus privat"} />
+
+            <br />
+
+            <Total transactions={transactions} />
+          </div>
+        )}
+      </div>
     </>
   )
 }
