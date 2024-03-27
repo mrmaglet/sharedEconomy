@@ -1,13 +1,18 @@
 import { Input } from "@/app/components/ui/input"
 import { Label } from "@/app/components/ui/label"
+import { atom, useAtom } from "jotai"
 import React, { useState } from "react"
 
-const PersonInputs = () => {
-  const [person1, setPerson1] = useState("")
-  const [person2, setPerson2] = useState("")
+export const person1Atom = atom("")
+export const person2Atom = atom("")
+export const person1SalaryAtom = atom<number | undefined>(undefined)
+export const person2SalaryAtom = atom<number | undefined>(undefined)
 
-  const [person1Salary, setPerson1Salary] = useState<number | undefined>()
-  const [person2Salary, setPerson2Salary] = useState<number | undefined>()
+const PersonInputs = () => {
+  const [person1, setPerson1] = useAtom(person1Atom)
+  const [person2, setPerson2] = useAtom(person2Atom)
+  const [person1Salary, setPerson1Salary] = useAtom(person1SalaryAtom)
+  const [person2Salary, setPerson2Salary] = useAtom(person2SalaryAtom)
 
   return (
     <div>
