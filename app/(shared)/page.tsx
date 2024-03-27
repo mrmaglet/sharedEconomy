@@ -7,6 +7,8 @@ import { ShareTable } from "@/app/components/common/table/ShareTable"
 import { processExcelFile } from "@/app/(shared)/lib/excelProcessor"
 import { TotalFooter } from "@/app/components/common/table/TotalFooter"
 import { Input } from "@/app/components/ui/input"
+import { Label } from "@/app/components/ui/label"
+import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 
 const transactionsAtom = atom<Transaction[]>([])
 
@@ -27,6 +29,8 @@ const Page = () => {
   return (
     <>
       <DropZone callback={onFileDropped} />
+
+      <PersonInputs />
 
       <div style={{ width: "fit-content" }}>
         {transactions?.length > 0 && (
