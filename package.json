@@ -19,6 +19,7 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.2",
     "tailwindcss-animate": "^1.0.7",
+    "ts-plugin-sort-import-suggestions": "^1.0.4",
     "xlsx": "file:vendor/xlsx-0.20.1.tgz"
   },
   "devDependencies": {
