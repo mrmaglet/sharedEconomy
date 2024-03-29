@@ -15,12 +15,13 @@ const PersonInputs = () => {
   const [person2Salary, setPerson2Salary] = useAtom(person2SalaryAtom)
 
   return (
-    <div>
-      <div className="flex">
+    <div className="flex gap-y-4 flex-col">
+      <div className="flex gap-x-4">
         <div>
           <Label>Person 1</Label>
           <Input type="text" value={person1} onChange={(e) => setPerson1(e.target.value)} />
         </div>
+
         <div>
           <Label>Lön</Label>
           <Input
@@ -31,18 +32,19 @@ const PersonInputs = () => {
         </div>
       </div>
 
-      <div className="flex">
+      <div className="flex flex gap-x-4">
         <div>
-          <Label>Person 2 lön</Label>
-          <Input type="text" value={person2} onChange={(e) => setPerson2(e.target.value)}></Input>
+          <Label>Person 2</Label>
+          <Input type="text" value={person2} onChange={(e) => setPerson2(e.target.value)} />
         </div>
+
         <div>
-          <Label>Person 2 lön</Label>
+          <Label>Lön</Label>
           <Input
             type="number"
             value={person2Salary}
             onChange={(e) => setPerson2Salary(Number(e.target.value) || undefined)}
-          ></Input>
+          />
         </div>
       </div>
     </div>

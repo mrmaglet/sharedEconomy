@@ -6,7 +6,6 @@ import {
 } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 import { transactionsAtom } from "@/app/(shared)/lib/store"
 import { roundToInteger, sumTransactions } from "@/lib/transactions-utils"
-import { Transaction } from "@/types/types"
 import { useAtom, useAtomValue } from "jotai"
 import React from "react"
 
@@ -40,10 +39,10 @@ const ShareResults = () => {
     <>
       <div className="mt-8 flex flex-col">
         <div>
-          {person1} should pay: {roundToInteger(shareResult.person1)}
+          {person1 || "Person 1"} should pay: {roundToInteger(shareResult.person1 || 0)}
         </div>
         <div>
-          {person2} should pay: {roundToInteger(shareResult.person2)}
+          {person2 || "Person 2"} should pay: {roundToInteger(shareResult.person2 || 0)}
         </div>
       </div>
     </>
