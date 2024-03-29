@@ -1,5 +1,6 @@
 import { TotalFooter } from "@/app/components/common/table/TotalFooter"
 import { Table, TableBody, TableCell, TableFooter, TableRow } from "@/app/components/ui/table"
+import { H3 } from "@/app/components/ui/typography"
 import { roundToInteger } from "@/lib/transactions-utils"
 import { Labels, Transaction } from "@/types/types"
 
@@ -13,7 +14,7 @@ interface Props {
 const ShareTable = ({ headline, transactions, labels, ...props }: Props) => {
   return (
     <div {...props}>
-      {headline && <h2>{headline}</h2>}
+      {headline && <H3 className="">{headline}</H3>}
 
       <Table>
         <TableBody>

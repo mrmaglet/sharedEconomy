@@ -24,8 +24,8 @@ const Page = () => {
   }
 
   return (
-    <>
-      <DropZone callback={onFileDropped} />
+    <div className="container my-10">
+      <DropZone callback={onFileDropped} className="mb-8" />
 
       <PersonInputs />
 
@@ -37,21 +37,13 @@ const Page = () => {
         {transactions?.length > 0 && (
           <>
             <div className="flex gap-10 flex-wrap">
-              <ShareTable
-                headline={"Ani Extrakort"}
-                transactions={transactions}
-                labels={"Dela Ani"}
-              />
+              <ShareTable headline={"Extrakort"} transactions={transactions} labels={"Dela Ani"} />
 
-              <ShareTable
-                headline="Magnus Huvudkort"
-                transactions={transactions}
-                labels={"Dela Magnus"}
-              />
+              <ShareTable headline="Huvudkort" transactions={transactions} labels={"Dela Magnus"} />
 
               <ShareTable
                 className="hidden"
-                headline="Magnus privat"
+                headline="Privat"
                 transactions={transactions}
                 labels={"Magnus privat"}
               />
@@ -66,7 +58,7 @@ const Page = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

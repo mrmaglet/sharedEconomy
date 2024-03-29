@@ -1,8 +1,11 @@
+import { cn } from "@/lib/utils"
+
 interface Props {
   callback: (data: ArrayBuffer) => void
+  className?: string
 }
 
-const DropZone = ({ callback }: Props) => {
+const DropZone = ({ callback, className }: Props) => {
   function handleDrop(e: React.DragEvent<HTMLDivElement>) {
     e.stopPropagation()
     e.preventDefault()
@@ -27,7 +30,7 @@ const DropZone = ({ callback }: Props) => {
 
   return (
     <div
-      style={{ background: "red" }}
+      className={cn("border-gray-200 border-2 border-dotted bg-sky-100 p-4 rounded-md", className)}
       onDrop={handleDrop}
       onDragOver={(e) => {
         e.preventDefault()
