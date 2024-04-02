@@ -1,10 +1,25 @@
 /** @type {import('next').NextConfig} */
+
+/**
+ * Config only needed for GitHub Pages deployment.
+ * Will not work with local development `npm run dev`.
+ */
+const buildGitHubPagesConfig = () => {
+  const isBuilding = env.NODE_ENV === "production"
+
+  if (!isBuilding) return {}
+
+  return {
+    distDir: "docs",
+    assetPrefix: "/sharedEconomy/",
+    basePath: "/sharedEconomy",
+  }
+}
+
 const nextConfig = {
   images: { unoptimized: true },
-  distDir: "docs",
   output: "export",
-  assetPrefix: "/sharedEconomy/",
-  basePath: "/sharedEconomy",
+  ...buildGitHubPagesConfig,
 }
 
 export default nextConfig
