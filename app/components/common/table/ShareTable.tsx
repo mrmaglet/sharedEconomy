@@ -1,3 +1,4 @@
+import { TableSummaryFooter } from "@/app/components/common/table/TableSummaryFooter"
 import { TotalFooter } from "@/app/components/common/table/TotalFooter"
 import { Table, TableBody, TableCell, TableFooter, TableRow } from "@/app/components/ui/table"
 import { H3 } from "@/app/components/ui/typography"
@@ -31,7 +32,7 @@ const ShareTable = ({ headline, transactions, labels, ...props }: Props) => {
           })}
         </TableBody>
 
-        <TotalFooter
+        <TableSummaryFooter
           transactions={transactions.filter((transaction) => transaction.labels === labels)}
         />
       </Table>

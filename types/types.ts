@@ -8,3 +8,5 @@ export type Transaction = {
   amount: number
   labels: Labels
 }
+
+export type RawSheet = Record<string, string>
