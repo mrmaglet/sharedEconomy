@@ -2,12 +2,13 @@
 
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { DropZone } from "@/app/components/common/drop-zone/DropZone"
-import { ShareTable } from "@/app/components/common/table/ShareTable"
+import { ShareTable } from "@/app/(shared)/components/ShareTable"
 import { processExcelFile } from "@/app/(shared)/lib/excelProcessor"
 import { TotalFooter } from "@/app/components/common/table/TotalFooter"
 import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 import { ShareResults } from "@/app/(shared)/components/ShareResults"
 import { rawSheetAtom, transactionsAtom } from "@/app/(shared)/lib/store"
+import { RawSheet } from "@/app/(shared)/RawSheet"
 
 const Page = () => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
@@ -38,6 +39,8 @@ const Page = () => {
         <ShareResults />
 
         <br />
+
+        <RawSheet />
 
         <div style={{ width: "fit-content" }}>
           {transactions?.length > 0 && (
