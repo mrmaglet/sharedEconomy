@@ -9,4 +9,5 @@ export type Transaction = {
   labels: Labels
 }
 
-export type RawSheet = Record<string, string>
+export type RawSheetRow = (string | number)[]
+export type RawSheet = RawSheetRow[]
