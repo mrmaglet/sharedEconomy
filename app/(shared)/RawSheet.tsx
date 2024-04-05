@@ -22,6 +22,7 @@ const RawSheet = () => {
   return (
     <>
       {wizard.current() === "SelectRow" && <H3>Select your header row</H3>}
+      {wizard.current() === "SelectSumCol" && <H3>Select your value col. </H3>}
 
       <div className="flex justify-between mt-6 mb-12">
         <Button onClick={() => wizard.prev()}>Prev</Button>
