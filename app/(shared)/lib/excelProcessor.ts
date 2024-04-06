@@ -9,7 +9,7 @@ function processExcelFile(file: ArrayBuffer) {
   function getFirstSheet(this: any) {
     value = read(file)
     value = value.Sheets[value.SheetNames[0]]
-    value = utils.sheet_to_json(value, { header: 1 })
+    value = utils.sheet_to_json(value, { header: 1, defval: "" })
 
     return this
   }
