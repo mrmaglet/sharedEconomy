@@ -5,11 +5,7 @@ const TableRowSelect = ({
   children,
   ...props
 }: PropsWithChildren<React.HTMLAttributes<HTMLTableRowElement>>) => {
-  return (
-    <TableRow className="hover:bg-[unset]" {...props}>
-      {children}
-    </TableRow>
-  )
+  return <TableRow {...props}>{children}</TableRow>
 }
 
 export { TableRowSelect }
