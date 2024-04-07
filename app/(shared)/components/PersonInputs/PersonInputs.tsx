@@ -26,7 +26,7 @@ const PersonInputs = () => {
           <Label>Lön</Label>
           <Input
             type="number"
-            value={person1Salary}
+            value={person1Salary || ""}
             onChange={(e) => setPerson1Salary(Number(e.target.value) || undefined)}
           />
         </div>
@@ -42,7 +42,7 @@ const PersonInputs = () => {
           <Label>Lön</Label>
           <Input
             type="number"
-            value={person2Salary}
+            value={person2Salary || ""}
             onChange={(e) => setPerson2Salary(Number(e.target.value) || undefined)}
           />
         </div>
