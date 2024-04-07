@@ -13,12 +13,12 @@ const buildGitHubPagesConfig = () => {
     distDir: "docs",
     assetPrefix: "/sharedEconomy/",
     basePath: "/sharedEconomy",
+    output: "export",
   }
 }
 
 const nextConfig = {
   images: { unoptimized: true },
-  output: "export",
   ...buildGitHubPagesConfig,
 }
 

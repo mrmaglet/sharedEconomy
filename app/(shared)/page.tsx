@@ -1,6 +1,6 @@
 "use client"
 
-import { useAtom, useAtomValue, useSetAtom } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { DropZone } from "@/app/components/common/drop-zone/DropZone"
 import { ShareTable } from "@/app/(shared)/components/ShareTable"
 import { processExcelFile } from "@/app/(shared)/lib/excelProcessor"
@@ -26,7 +26,6 @@ const Page = () => {
 
     const rawSheet = processExcelFile(data).getFirstSheet().getValue()
     setRawSheet(rawSheet)
-    console.log("rawSheet", rawSheet)
   }
 
   return (

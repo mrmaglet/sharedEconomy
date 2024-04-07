@@ -8,7 +8,7 @@ interface Props {
 }
 
 /**
- * Combined footer for tables.
+ * Shared table footer for tables.
  */
 const TableSummaryFooter = ({ transactions }: Props) => {
   return (

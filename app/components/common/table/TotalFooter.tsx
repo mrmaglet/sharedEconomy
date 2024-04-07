@@ -1,4 +1,11 @@
-import { TableFooter, TableRow, TableCell, Table } from "@/app/components/ui/table"
+import {
+  TableFooter,
+  TableRow,
+  TableCell,
+  Table,
+  TableHead,
+  TableBody,
+} from "@/app/components/ui/table"
 import { sumTransactions } from "@/lib/transactions-utils"
 import { Transaction } from "@/types/types"
 import React from "react"
@@ -8,7 +15,7 @@ interface Props {
 }
 
 /**
- * A fill width stand alone table footer that sums up the transactions.
+ * A stand alone table with only a footer with a total. Full width.
  */
 const TotalFooter = ({ transactions }: Props) => {
   return (

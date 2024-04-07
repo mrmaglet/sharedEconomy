@@ -2,9 +2,8 @@
 
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
-import { TableRowSelect } from "@/app/components/common/select-table/TableRowSelect"
 import { Button } from "@/app/components/ui/button"
-import { Table, TableCell } from "@/app/components/ui/table"
+import { Table, TableBody, TableCell, TableRow } from "@/app/components/ui/table"
 import { H3 } from "@/app/components/ui/typography"
 import { RawSheetRow } from "@/types/types"
 import { useAtomValue } from "jotai"
@@ -33,14 +32,11 @@ const RawSheet = () => {
       return props
     }
 
-    // if (wizard.current() === "SelectSumCol") {
-    // let props: React.HTMLAttributes<HTMLTableRowElement> = {}
-
     props = {
-      className: `${selectedRow === row && "bg-blue-100 font-bold hover:bg-blue-100"}`,
+      className: `
+      hover:bg-[unset] ${selectedRow === row && "bg-blue-100 font-bold hover:bg-blue-100"} `,
     }
     return props
-    // }
   }
 
   const getCellProps = (row: number, col: number) => {
@@ -49,10 +45,7 @@ const RawSheet = () => {
     const handleMouseIn = (row: number, col: number) => {
       if (selectedRow == null) return
 
-      if (row >= selectedRow) {
-        console.log("hovering over row")
-        setHoverPos([row, col])
-      }
+      if (row >= selectedRow) setHoverPos([row, col])
     }
 
     const handleMouseOut = (e: React.MouseEvent<HTMLTableCellElement>) => {
@@ -70,7 +63,7 @@ const RawSheet = () => {
 
     if (wizard.current() === "SelectSumCol") {
       props = {
-        className: `${
+        className: `break-keep whitespace-nowrap ${
           hoverPos?.[1] === col && selectedRow && row >= selectedRow ? "bg-amber-100" : ""
         } 
         ${selectSumCol === col && selectedRow && row >= selectedRow ? "bg-amber-100" : ""}
@@ -91,7 +84,7 @@ const RawSheet = () => {
     }
 
     props = {
-      className: `${
+      className: `break-keep whitespace-nowrap ${
         selectSumCol === col && selectedRow && row >= selectedRow ? "bg-amber-100" : ""
       }`,
     }
@@ -111,15 +104,17 @@ const RawSheet = () => {
       </div>
 
       <Table>
-        {rawSheet.map((row: RawSheetRow, i: number, arr) => (
-          <TableRowSelect key={i} {...getRowProps(i)}>
-            {row.map((cell: string | number, j: number) => (
-              <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
-                {cell}
-              </TableCell>
-            ))}
-          </TableRowSelect>
-        ))}
+        <TableBody>
+          {rawSheet.map((row: RawSheetRow, i: number, arr) => (
+            <TableRow key={i} {...getRowProps(i)}>
+              {row.map((cell: string | number, j: number) => (
+                <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
+                  {cell}
+                </TableCell>
+              ))}
+            </TableRow>
+          ))}
+        </TableBody>
       </Table>
     </>
   )
