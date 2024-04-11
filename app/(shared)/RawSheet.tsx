@@ -1,5 +1,6 @@
 "use client"
 
+import { AddLabels } from "@/app/(shared)/AddLabels"
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
 import { Button } from "@/app/components/ui/button"
@@ -97,6 +98,9 @@ const RawSheet = () => {
     <>
       {wizard.current() === "SelectRow" && <H3>Select your header row</H3>}
       {wizard.current() === "SelectSumCol" && <H3>Select your value col. </H3>}
+      {wizard.current() === "Done" && <H3>Add groups</H3>}
+
+      <AddLabels />
 
       <div className="flex justify-between mt-6 mb-12">
         <Button onClick={() => wizard.prev()}>Prev</Button>
@@ -105,7 +109,7 @@ const RawSheet = () => {
 
       <Table>
         <TableBody>
-          {rawSheet.map((row: RawSheetRow, i: number, arr) => (
+          {rawSheet.map((row: RawSheetRow, i: number) => (
             <TableRow key={i} {...getRowProps(i)}>
               {row.map((cell: string | number, j: number) => (
                 <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
