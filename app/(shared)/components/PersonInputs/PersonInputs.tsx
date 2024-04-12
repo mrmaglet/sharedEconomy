@@ -1,5 +1,6 @@
-import { Input } from "@/app/components/ui/input"
-import { Label } from "@/app/components/ui/label"
+"use client"
+
+import { Input } from "@nextui-org/react"
 import { atom, useAtom } from "jotai"
 import React, { useState } from "react"
 
@@ -18,12 +19,12 @@ const PersonInputs = () => {
     <div className="flex gap-y-4 flex-col">
       <div className="flex gap-x-4">
         <div>
-          <Label>Person 1</Label>
+          <label>Person 1</label>
           <Input type="text" value={person1} onChange={(e) => setPerson1(e.target.value)} />
         </div>
 
         <div>
-          <Label>Lön</Label>
+          <label>Lön</label>
           <Input
             type="number"
             value={person1Salary || ""}
@@ -34,12 +35,12 @@ const PersonInputs = () => {
 
       <div className="flex flex gap-x-4">
         <div>
-          <Label>Person 2</Label>
+          <label>Person 2</label>
           <Input type="text" value={person2} onChange={(e) => setPerson2(e.target.value)} />
         </div>
 
         <div>
-          <Label>Lön</Label>
+          <label>Lön</label>
           <Input
             type="number"
             value={person2Salary || ""}

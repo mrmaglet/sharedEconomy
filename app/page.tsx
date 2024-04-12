@@ -33,19 +33,19 @@ const Page = () => {
       <div className="container my-10">
         <DropZone callback={onFileDropped} className="mb-8" />
 
-        <PersonInputs />
+        {/* <PersonInputs /> */}
 
-        <ShareResults />
+        {/* <ShareResults />  */}
 
         <br />
 
-        <RawSheet />
+        {/* <RawSheet /> */}
 
         <div style={{ width: "fit-content" }}>
           {transactions?.length > 0 && (
             <>
               <div className="flex gap-10 flex-wrap">
-                <ShareTable
+                {/* <ShareTable
                   headline={"Extrakort"}
                   transactions={transactions}
                   labels={"Dela Ani"}
@@ -62,18 +62,18 @@ const Page = () => {
                   headline="Privat"
                   transactions={transactions}
                   labels={"Magnus privat"}
-                />
+                /> */}
               </div>
             </>
           )}
         </div>
       </div>
 
-      <TotalFooter
+      {/* <TotalFooter
         transactions={transactions.filter(
           (transaction) => transaction.labels === "Dela Ani" || transaction.labels === "Dela Magnus"
         )}
-      />
+      /> */}
     </>
   )
 }

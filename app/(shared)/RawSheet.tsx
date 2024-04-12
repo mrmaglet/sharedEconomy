@@ -3,9 +3,7 @@
 import { AddLabels } from "@/app/(shared)/AddLabels"
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
-import { Button } from "@/app/components/ui/button"
-import { Table, TableBody, TableCell, TableRow } from "@/app/components/ui/table"
-import { H3 } from "@/app/components/ui/typography"
+
 import { RawSheetRow } from "@/types/types"
 import { useAtomValue } from "jotai"
 import React, { DOMAttributes, MouseEventHandler, use, useEffect, useState } from "react"
@@ -96,30 +94,30 @@ const RawSheet = () => {
 
   return (
     <>
-      {wizard.current() === "SelectRow" && <H3>Select your header row</H3>}
-      {wizard.current() === "SelectSumCol" && <H3>Select your value col. </H3>}
-      {wizard.current() === "Done" && <H3>Add groups</H3>}
+      {wizard.current() === "SelectRow" && <h3>Select your header row</h3>}
+      {wizard.current() === "SelectSumCol" && <h3>Select your value col. </h3>}
+      {wizard.current() === "Done" && <h3>Add groups</h3>}
 
       <AddLabels />
 
       <div className="flex justify-between mt-6 mb-12">
-        <Button onClick={() => wizard.prev()}>Prev</Button>
-        <Button onClick={() => wizard.next()}>Next</Button>
+        <button onClick={() => wizard.prev()}>Prev</button>
+        <button onClick={() => wizard.next()}>Next</button>
       </div>
 
-      <Table>
-        <TableBody>
+      <table>
+        <tablebody>
           {rawSheet.map((row: RawSheetRow, i: number) => (
-            <TableRow key={i} {...getRowProps(i)}>
+            <td key={i} {...getRowProps(i)}>
               {row.map((cell: string | number, j: number) => (
-                <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
+                <td {...getCellProps(i, j)} key={`${i}-${j}`}>
                   {cell}
-                </TableCell>
+                </>
               ))}
-            </TableRow>
+            </td>
           ))}
-        </TableBody>
-      </Table>
+        </tablebody>
+      </table>
     </>
   )
 }
