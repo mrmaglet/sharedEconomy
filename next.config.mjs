@@ -22,4 +22,4 @@ const nextConfig = {
   ...buildGitHubPagesConfig,
 }
 
-export default nextConfig
+export default nextConfig;
