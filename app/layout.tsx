@@ -1,6 +1,6 @@
 import { Provider } from "jotai"
-import "@/lib/global.css"
-import { Providers } from "@/app/Providers"
+import { Providers } from "@/app/providers"
+import "../lib/globals.css"
 
 export const metadata = {
   title: "Next.js",
@@ -10,11 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <Provider>
-      <Providers>
-        <html lang="en">
-          <body>{children}</body>
-        </html>
-      </Providers>
+      <html lang="en">
+        <body>
+          <Providers>{children}</Providers>
+        </body>
+      </html>
     </Provider>
   )
 }
