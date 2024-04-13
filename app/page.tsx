@@ -35,11 +35,11 @@ const Page = () => {
 
         <PersonInputs />
 
-        {/* <ShareResults />  */}
+        <ShareResults />
 
         <br />
 
-        {/* <RawSheet /> */}
+        <RawSheet />
 
         <div style={{ width: "fit-content" }}>
           {transactions?.length > 0 && (
@@ -69,11 +69,11 @@ const Page = () => {
         </div>
       </div>
 
-      {/* <TotalFooter
+      <TotalFooter
         transactions={transactions.filter(
           (transaction) => transaction.labels === "Dela Ani" || transaction.labels === "Dela Magnus"
         )}
-      /> */}
+      />
     </>
   )
 }
