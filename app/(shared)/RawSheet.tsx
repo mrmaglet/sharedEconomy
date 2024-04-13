@@ -3,6 +3,7 @@
 import { AddLabels } from "@/app/(shared)/AddLabels"
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 
 import { RawSheetRow } from "@/types/types"
 import { useAtomValue } from "jotai"
@@ -94,30 +95,40 @@ const RawSheet = () => {
 
   return (
     <>
-      {wizard.current() === "SelectRow" && <h3>Select your header row</h3>}
-      {wizard.current() === "SelectSumCol" && <h3>Select your value col. </h3>}
-      {wizard.current() === "Done" && <h3>Add groups</h3>}
+      {wizard.current() === "SelectRow" && <h2>Select your header row</h2>}
+      {wizard.current() === "SelectSumCol" && <h2>Select your value col. </h2>}
+      {wizard.current() === "Done" && <h2>Add groups</h2>}
 
-      {/* <AddLabels /> */}
+      {wizard.current() === "Done" && <AddLabels />}
 
       <div className="flex justify-between mt-6 mb-12">
         <button onClick={() => wizard.prev()}>Prev</button>
         <button onClick={() => wizard.next()}>Next</button>
       </div>
 
-      <table>
-        <tbody>
+      <Table hideHeader>
+        <TableHeader>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+          <TableColumn>Header</TableColumn>
+        </TableHeader>
+
+        <TableBody>
           {rawSheet.map((row: RawSheetRow, i: number) => (
-            <tr key={i} {...getRowProps(i)}>
+            <TableRow key={i} {...getRowProps(i)}>
               {row.map((cell: string | number, j: number) => (
-                <td {...getCellProps(i, j)} key={`${i}-${j}`}>
+                <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
                   {cell}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </>
   )
 }

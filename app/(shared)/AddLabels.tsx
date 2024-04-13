@@ -1,39 +1,44 @@
 import React from "react"
+import { Select, SelectItem } from "@nextui-org/react"
 
 const AddLabels = () => {
   return (
     <div>
-      Column{" "}
-      <Select>
-        <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a fruit" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
-            <SelectItem value="apple">Apple</SelectItem>
-            <SelectItem value="banana">Banana</SelectItem>
-            <SelectItem value="blueberry">Blueberry</SelectItem>
-            <SelectItem value="grapes">Grapes</SelectItem>
-            <SelectItem value="pineapple">Pineapple</SelectItem>
-          </SelectGroup>
-        </SelectContent>
+      <Select label="Select a column" labelPlacement="outside" className="max-w-xs">
+        <SelectItem value="" key="">
+          None
+        </SelectItem>
+        <SelectItem value="Date" key="Date">
+          Date
+        </SelectItem>
+        <SelectItem value="Card" key="Card">
+          Card
+        </SelectItem>
+        <SelectItem value="Card number" key="Card number">
+          Card Number
+        </SelectItem>
       </Select>
-      <select>
-        <option value="column">Date</option>
-        <option value="column">Card</option>
-        <option value="column">Card Number</option>
-      </select>
-      <select>
-        <option value="column">Equals</option>
-        <option value="column">Contains</option>
-        <option value="column">Starts with</option>
-      </select>
-      <select>
-        <option value="column">Huvudkort</option>
-        <option value="column">Extrakort</option>
-      </select>
-      <Input type="text" />
+
+      <Select label="Select type" labelPlacement="outside" className="max-w-xs">
+        <SelectItem value="column" key="column">
+          Equals
+        </SelectItem>
+        <SelectItem value="column" key="column">
+          Contains
+        </SelectItem>
+        <SelectItem value="column" key="column">
+          Starts with
+        </SelectItem>
+      </Select>
+
+      <Select label="Content of exact value" labelPlacement="outside" className="max-w-xs">
+        <SelectItem value="column" key="column">
+          Huvudkort
+        </SelectItem>
+        <SelectItem value="column" key="column">
+          Extrakort
+        </SelectItem>
+      </Select>
     </div>
   )
 }
