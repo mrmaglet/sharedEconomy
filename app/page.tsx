@@ -33,7 +33,7 @@ const Page = () => {
       <div className="container my-10">
         <DropZone callback={onFileDropped} className="mb-8" />
 
-        {/* <PersonInputs /> */}
+        <PersonInputs />
 
         {/* <ShareResults />  */}
 

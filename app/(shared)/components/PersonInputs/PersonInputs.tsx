@@ -19,15 +19,23 @@ const PersonInputs = () => {
     <div className="flex gap-y-4 flex-col">
       <div className="flex gap-x-4">
         <div>
-          <label>Person 1</label>
-          <Input type="text" value={person1} onChange={(e) => setPerson1(e.target.value)} />
+          <Input
+            type="text"
+            label="Person 1"
+            labelPlacement="outside"
+            placeholder=" "
+            value={person1}
+            onChange={(e) => setPerson1(e.target.value)}
+          />
         </div>
 
         <div>
-          <label>Lön</label>
           <Input
             type="number"
-            value={person1Salary || ""}
+            label="Lön"
+            labelPlacement="outside"
+            placeholder=" "
+            value={person1Salary?.toString() || ""}
             onChange={(e) => setPerson1Salary(Number(e.target.value) || undefined)}
           />
         </div>
@@ -35,15 +43,23 @@ const PersonInputs = () => {
 
       <div className="flex flex gap-x-4">
         <div>
-          <label>Person 2</label>
-          <Input type="text" value={person2} onChange={(e) => setPerson2(e.target.value)} />
+          <Input
+            type="text"
+            label="Person 2"
+            value={person2}
+            labelPlacement="outside"
+            placeholder=" "
+            onChange={(e) => setPerson2(e.target.value)}
+          />
         </div>
 
         <div>
-          <label>Lön</label>
           <Input
             type="number"
-            value={person2Salary || ""}
+            label="Lön"
+            labelPlacement="outside"
+            placeholder=" "
+            value={person2Salary?.toString() || ""}
             onChange={(e) => setPerson2Salary(Number(e.target.value) || undefined)}
           />
         </div>
