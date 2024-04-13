@@ -1,13 +1,3 @@
-import { Input } from "@/app/components/ui/input"
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-} from "@radix-ui/react-select"
 import React from "react"
 
 const AddLabels = () => {

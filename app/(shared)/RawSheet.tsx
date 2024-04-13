@@ -98,7 +98,7 @@ const RawSheet = () => {
       {wizard.current() === "SelectSumCol" && <h3>Select your value col. </h3>}
       {wizard.current() === "Done" && <h3>Add groups</h3>}
 
-      <AddLabels />
+      {/* <AddLabels /> */}
 
       <div className="flex justify-between mt-6 mb-12">
         <button onClick={() => wizard.prev()}>Prev</button>
@@ -106,17 +106,17 @@ const RawSheet = () => {
       </div>
 
       <table>
-        <tablebody>
+        <tbody>
           {rawSheet.map((row: RawSheetRow, i: number) => (
-            <td key={i} {...getRowProps(i)}>
+            <tr key={i} {...getRowProps(i)}>
               {row.map((cell: string | number, j: number) => (
                 <td {...getCellProps(i, j)} key={`${i}-${j}`}>
                   {cell}
-                </>
+                </td>
               ))}
-            </td>
+            </tr>
           ))}
-        </tablebody>
+        </tbody>
       </table>
     </>
   )
