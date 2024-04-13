@@ -9,6 +9,7 @@ import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInput
 import { ShareResults } from "@/app/(shared)/components/ShareResults"
 import { rawSheetAtom, transactionsAtom } from "@/app/(shared)/lib/store"
 import { RawSheet } from "@/app/(shared)/RawSheet"
+import { Card } from "@nextui-org/react"
 
 const Page = () => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
@@ -33,9 +34,10 @@ const Page = () => {
       <div className="container my-10">
         <DropZone callback={onFileDropped} className="mb-8" />
 
-        <PersonInputs />
-
-        <ShareResults />
+        <Card className="p-10">
+          <PersonInputs />
+          <ShareResults />
+        </Card>
 
         <br />
 
