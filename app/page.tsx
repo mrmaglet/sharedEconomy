@@ -8,8 +8,8 @@ import { TotalFooter } from "@/app/components/common/table/TotalFooter"
 import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 import { ShareResults } from "@/app/(shared)/components/ShareResults"
 import { rawSheetAtom, transactionsAtom } from "@/app/(shared)/lib/store"
-import { RawSheet } from "@/app/(shared)/RawSheet"
 import { Card } from "@nextui-org/react"
+import { Config } from "@/app/(shared)/components/config/Config"
 
 const Page = () => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
@@ -41,7 +41,7 @@ const Page = () => {
 
         <br />
 
-        <RawSheet />
+        <Config />
 
         <div style={{ width: "fit-content" }}>
           {transactions?.length > 0 && (

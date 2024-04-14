@@ -3,13 +3,22 @@
 import { AddLabels } from "@/app/(shared)/AddLabels"
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Button,
+} from "@nextui-org/react"
 
 import { RawSheetRow } from "@/types/types"
 import { useAtomValue } from "jotai"
 import React, { DOMAttributes, MouseEventHandler, use, useEffect, useState } from "react"
+import { ConfigHeader } from "@/app/(shared)/components/config/ConfigHeader"
 
-const RawSheet = () => {
+const Config = () => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null)
   const [selectSumCol, setSelectSumCol] = useState<number | null>(null)
   const [hoverPos, setHoverPos] = useState<[number, number] | null>(null)
@@ -95,15 +104,16 @@ const RawSheet = () => {
 
   return (
     <>
-      {wizard.current() === "SelectRow" && <h2>Select your header row</h2>}
+      {wizard.current() === "SelectRow" && <ConfigHeader />}
+
       {wizard.current() === "SelectSumCol" && <h2>Select your value col. </h2>}
       {wizard.current() === "Done" && <h2>Add groups</h2>}
 
       {wizard.current() === "Done" && <AddLabels />}
 
       <div className="flex justify-between mt-6 mb-12">
-        <button onClick={() => wizard.prev()}>Prev</button>
-        <button onClick={() => wizard.next()}>Next</button>
+        <Button onClick={() => wizard.prev()}>Prev</Button>
+        <Button onClick={() => wizard.next()}>Next</Button>
       </div>
 
       <Table hideHeader>
@@ -133,4 +143,4 @@ const RawSheet = () => {
   )
 }
 
-export { RawSheet }
+export { Config }
