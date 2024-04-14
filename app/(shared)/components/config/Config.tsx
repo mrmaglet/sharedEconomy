@@ -1,6 +1,5 @@
 "use client"
 
-import { AddLabels } from "@/app/(shared)/AddLabels"
 import { rawSheetAtom } from "@/app/(shared)/lib/store"
 import { useWizard } from "@/app/(shared)/lib/useWizard"
 import {
@@ -17,6 +16,8 @@ import { RawSheetRow } from "@/types/types"
 import { useAtomValue } from "jotai"
 import React, { DOMAttributes, MouseEventHandler, use, useEffect, useState } from "react"
 import { ConfigHeader } from "@/app/(shared)/components/config/ConfigHeader"
+import { ConfigValueCol } from "@/app/(shared)/components/config/ConfigValueCol"
+import { ConfigFilters } from "@/app/(shared)/components/config/ConfigFilters"
 
 const Config = () => {
   const [selectedRow, setSelectedRow] = useState<number | null>(null)
@@ -25,7 +26,7 @@ const Config = () => {
 
   const rawSheet = useAtomValue(rawSheetAtom)
 
-  const steps = ["SelectRow", "SelectSumCol", "Done"] as const
+  const steps = ["SelectRow", "SelectSumCol", "Filters"] as const
   const wizard = useWizard<(typeof steps)[number]>(steps)
 
   const getRowProps = (row: number) => {
@@ -105,11 +106,8 @@ const Config = () => {
   return (
     <>
       {wizard.current() === "SelectRow" && <ConfigHeader />}
-
-      {wizard.current() === "SelectSumCol" && <h2>Select your value col. </h2>}
-      {wizard.current() === "Done" && <h2>Add groups</h2>}
-
-      {wizard.current() === "Done" && <AddLabels />}
+      {wizard.current() === "SelectSumCol" && <ConfigValueCol />}
+      {wizard.current() === "Filters" && <ConfigFilters />}
 
       <div className="flex justify-between mt-6 mb-12">
         <Button onClick={() => wizard.prev()}>Prev</Button>
