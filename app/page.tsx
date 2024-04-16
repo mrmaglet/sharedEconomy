@@ -10,13 +10,20 @@ import { ShareResults } from "@/app/(shared)/components/ShareResults"
 import { rawSheetAtom, transactionsAtom } from "@/app/(shared)/lib/store"
 import { Card } from "@nextui-org/react"
 import { Config } from "@/app/(shared)/components/config/Config"
+import { parseFirstSheetToJson } from "@/app/(shared)/lib/parseFirstSheetToJson"
 
 const Page = () => {
   const [transactions, setTransactions] = useAtom(transactionsAtom)
   const setRawSheet = useSetAtom(rawSheetAtom)
 
-  const onFileDropped = (data: ArrayBuffer) => {
-    const workbook = processExcelFile(data)
+  const onFileDropped = (file: ArrayBuffer) => {
+    const parsedFile = parseFirstSheetToJson(file)
+
+    if (parsedFile.success === false) alert("Failed to parse file!")
+
+    setRawSheet(parsedFile.data)
+
+    const workbook = processExcelFile(file)
       .getFirstSheet()
       .stripFirstNrRows(5)
       .createColumns()
@@ -25,8 +32,8 @@ const Page = () => {
 
     setTransactions(workbook)
 
-    const rawSheet = processExcelFile(data).getFirstSheet().getValue()
-    setRawSheet(rawSheet)
+    // const rawSheet = processExcelFile(file).getFirstSheet().getValue()
+    // setRawSheet(rawSheet)
   }
 
   return (

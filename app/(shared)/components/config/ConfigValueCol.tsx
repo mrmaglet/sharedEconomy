@@ -1,11 +1,17 @@
-import { rawSheetAtom } from "@/app/(shared)/lib/store"
+import { configAtom, headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
 import { RawSheetRow } from "@/types/types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
-import { useAtomValue } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import React, { useState } from "react"
 
 const ConfigValueCol = () => {
   const rawSheet = useAtomValue(rawSheetAtom)
+  const headerRow = useAtomValue(headerRowAtom)
+
+  const config = useAtomValue(configAtom)
+
+  console.log("config", config)
+  console.log("headerRow", headerRow)
 
   const [selectedRow, setSelectedRow] = useState<number | null>(null)
 
@@ -61,7 +67,7 @@ const ConfigValueCol = () => {
     <>
       <h2>Select your value col. </h2>
 
-      <Table hideHeader>
+      <Table aria-label="Table">
         <TableHeader>
           <TableColumn>Header</TableColumn>
           <TableColumn>Header</TableColumn>

@@ -105,38 +105,43 @@ const Config = () => {
 
   return (
     <>
+      <div className="flex justify-between mt-6 mb-12">
+        <Button onClick={() => wizard.prev()} color="primary">
+          Prev
+        </Button>
+        <Button onClick={() => wizard.next()} color="primary">
+          Next
+        </Button>
+      </div>
+
       {wizard.current() === "SelectRow" && <ConfigHeader />}
       {wizard.current() === "SelectSumCol" && <ConfigValueCol />}
       {wizard.current() === "Filters" && <ConfigFilters />}
 
-      <div className="flex justify-between mt-6 mb-12">
-        <Button onClick={() => wizard.prev()}>Prev</Button>
-        <Button onClick={() => wizard.next()}>Next</Button>
+      <div>
+        <Table hideHeader aria-label="Table">
+          <TableHeader>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+            <TableColumn>Header</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {rawSheet.map((row: RawSheetRow, i: number) => (
+              <TableRow key={i} {...getRowProps(i)}>
+                {row.map((cell: string | number, j: number) => (
+                  <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
+                    {cell}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </div>
-
-      <Table hideHeader>
-        <TableHeader>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-        </TableHeader>
-
-        <TableBody>
-          {rawSheet.map((row: RawSheetRow, i: number) => (
-            <TableRow key={i} {...getRowProps(i)}>
-              {row.map((cell: string | number, j: number) => (
-                <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
-                  {cell}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
     </>
   )
 }

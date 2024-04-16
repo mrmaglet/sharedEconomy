@@ -10,4 +10,5 @@ export type Transaction = {
 }
 
 export type RawSheetRow = (string | number)[]
+/** Parsed json from excel file */
 export type RawSheet = RawSheetRow[]

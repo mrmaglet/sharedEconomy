@@ -2,6 +2,7 @@ import { headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
 import { RawSheetRow } from "@/types/types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import { useAtomValue, useSetAtom } from "jotai"
+import { useEffect } from "react"
 
 const ConfigHeader = () => {
   const rawSheet = useAtomValue(rawSheetAtom)
@@ -17,10 +18,10 @@ const ConfigHeader = () => {
       <h2>Select your header row</h2>
 
       <Table
-        aria-label="Controlled table example with dynamic content"
+        aria-label="Table"
         hideHeader
         selectionMode="single"
-        color={"primary"}
+        color="primary"
         onSelectionChange={(e: any) => setHeaderRow(e.anchorKey)}
       >
         <TableHeader className="hidden">
