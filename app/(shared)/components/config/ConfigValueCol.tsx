@@ -1,4 +1,5 @@
 import { configAtom, headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
+import { useConfig } from "@/app/(shared)/lib/useConfig"
 import { RawSheetRow } from "@/types/types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import { useAtomValue, useSetAtom } from "jotai"
@@ -9,6 +10,10 @@ const ConfigValueCol = () => {
   const headerRow = useAtomValue(headerRowAtom)
 
   const config = useAtomValue(configAtom)
+
+  const { processConfig } = useConfig()
+
+  const filteredSheet = processConfig().stripFirstNrRows().getValue()
 
   console.log("config", config)
   console.log("headerRow", headerRow)
@@ -63,31 +68,33 @@ const ConfigValueCol = () => {
 
   if (!rawSheet) return
 
+  // TODO: extract first row and spread the rest.
+  const firstRow = filteredSheet?.[0]
+
   return (
     <>
       <h2>Select your value col. </h2>
 
       <Table aria-label="Table">
-        <TableHeader>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
+        <TableHeader className="hidden">
+          {firstRow.map((cell: string | number, i: number) => (
+            <TableColumn key={`${i}-${cell}`}>{cell}</TableColumn>
+          ))}
         </TableHeader>
 
         <TableBody>
-          {rawSheet.map((row: RawSheetRow, i: number) => (
-            <TableRow key={i}>
-              {row.map((cell: string | number, j: number) => (
-                <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
-                  {cell}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+          {filteredSheet.map((row: RawSheetRow, i: number) => {
+            i = i + 4
+            return (
+              <TableRow key={i}>
+                {row.map((cell: string | number, j: number) => (
+                  <TableCell {...getCellProps(i, j)} key={`${i}-${j}`}>
+                    {cell}
+                  </TableCell>
+                ))}
+              </TableRow>
+            )
+          })}
         </TableBody>
       </Table>
     </>
