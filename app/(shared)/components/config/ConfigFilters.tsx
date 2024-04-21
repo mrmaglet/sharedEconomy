@@ -1,4 +1,4 @@
-import { rawSheetAtom } from "@/app/(shared)/lib/store"
+import { useConfig } from "@/app/(shared)/lib/useConfig"
 import { RawSheetRow } from "@/types/types"
 import {
   Table,
@@ -10,18 +10,15 @@ import {
   Select,
   SelectItem,
 } from "@nextui-org/react"
-import { useAtomValue } from "jotai"
-import React, { useState } from "react"
+import React from "react"
 
 const ConfigFilters = () => {
-  const rawSheet = useAtomValue(rawSheetAtom)
+  const { processConfig } = useConfig()
+  const filteredSheet = processConfig().stripFirstNrRows().getValue()
 
-  const [selectedRow, setSelectedRow] = useState<number | null>(null)
+  if (filteredSheet.length === 0) return null
 
-  const [selectSumCol, setSelectSumCol] = useState<number | null>(null)
-  const [hoverPos, setHoverPos] = useState<[number, number] | null>(null)
-
-  if (!rawSheet) return
+  const [firstRow, ...bodyRows] = filteredSheet
 
   return (
     <>
@@ -65,19 +62,15 @@ const ConfigFilters = () => {
         </Select>
       </div>
 
-      <Table hideHeader>
+      <Table>
         <TableHeader>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
-          <TableColumn>Header</TableColumn>
+          {firstRow.map((cell: string | number, i: number) => (
+            <TableColumn key={`${i}-${cell}`}>{cell}</TableColumn>
+          ))}
         </TableHeader>
 
         <TableBody>
-          {rawSheet.map((row: RawSheetRow, i: number) => (
+          {bodyRows.map((row: RawSheetRow, i: number) => (
             <TableRow key={i}>
               {row.map((cell: string | number, j: number) => (
                 <TableCell key={`${i}-${j}`}>{cell}</TableCell>

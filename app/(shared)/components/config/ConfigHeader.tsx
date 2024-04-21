@@ -2,7 +2,6 @@ import { headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
 import { RawSheetRow } from "@/types/types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import { useAtomValue, useSetAtom } from "jotai"
-import { useEffect } from "react"
 
 const ConfigHeader = () => {
   const rawSheet = useAtomValue(rawSheetAtom)
