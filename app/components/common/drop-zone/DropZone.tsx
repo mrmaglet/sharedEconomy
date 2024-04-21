@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils"
 
 interface Props {
-  callback: (data: ArrayBuffer) => void
+  callback: (file: ArrayBuffer) => void
   className?: string
 }
 
@@ -22,7 +22,7 @@ const DropZone = ({ callback, className }: Props) => {
 
       const file = e.target.result
 
-      if (file.constructor === ArrayBuffer) callback(file) //
+      if (file.constructor === ArrayBuffer) callback(file)
     }
 
     reader.onerror = function (e: ProgressEvent<FileReader>) {

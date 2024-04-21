@@ -1,5 +1,5 @@
 import { Provider } from "jotai"
-import { Providers } from "@/app/providers"
+import { Providers } from "@/app/Providers"
 import "../lib/globals.css"
 
 export const metadata = {
