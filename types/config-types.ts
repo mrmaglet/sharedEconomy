@@ -23,12 +23,18 @@ type Filter =
 
 // # Column filter
 type ColumnFilter = {
-  SelectType: Extract<SelectType, "column">
+  SelectType: {
+    selection: Extract<SelectType, "column">
+    description: string
+  }
   column: number
 } & (TextFilter | SelectFilter | ActionDelete | ActionGroup)
 
 type TextFilter = {
-  filterType: Extract<FilterType, "start-with" | "contains" | "end-with">
+  SelectType: {
+    selection: Extract<SelectType, "start-with" | "contains" | "end-with">
+    description: string
+  }
   filterText: string
 }
 
