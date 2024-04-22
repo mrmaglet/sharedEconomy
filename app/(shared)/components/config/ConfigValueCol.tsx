@@ -1,5 +1,5 @@
 import { useConfig } from "@/app/(shared)/lib/useConfig"
-import { RawSheetRow } from "@/types/config-types"
+import { RawSheetRow } from "@/types/types"
 import {
   Table,
   TableHeader,

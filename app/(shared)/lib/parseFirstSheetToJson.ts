@@ -1,4 +1,4 @@
-import { RawSheet } from "@/types/config-types"
+import { RawSheet } from "@/types/types"
 import { read, utils } from "xlsx"
 
 /**
