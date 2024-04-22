@@ -1,4 +1,4 @@
-import { RawSheet } from "@/types/types"
+import { RawSheet } from "@/types/config-types"
 import { atom } from "jotai"
 
 export const rawSheetAtom = atom<RawSheet | null>(null)

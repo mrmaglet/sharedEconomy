@@ -1,4 +1,4 @@
-import { Transaction } from "@/types/types"
+import { Transaction } from "@/types/config-types"
 
 /**
  * Total sum.

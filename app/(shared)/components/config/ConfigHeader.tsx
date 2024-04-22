@@ -1,5 +1,5 @@
 import { headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
-import { RawSheetRow } from "@/types/types"
+import { RawSheetRow } from "@/types/config-types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import { useAtomValue, useSetAtom } from "jotai"
 
