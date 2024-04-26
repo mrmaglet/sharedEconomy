@@ -5,10 +5,10 @@ import { RawSheet } from "@/types/types"
  */
 export type Configuration = {
   name: string
-  files: File[]
+  files: SheetFile[]
 }
 
-type File = {
+export type SheetFile = {
   name: string
   file: RawSheet
   filters: Filter[]
