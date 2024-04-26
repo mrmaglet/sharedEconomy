@@ -1,22 +1,16 @@
+import { selectSumColAtom } from "@/app/(shared)/lib/store"
 import { useConfig } from "@/app/(shared)/lib/useConfig"
 import { RawSheetRow } from "@/types/types"
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  TableColumnProps,
-} from "@nextui-org/react"
-import { useAtomValue, useSetAtom } from "jotai"
-import React, { use, useEffect, useState } from "react"
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
+import { useAtom } from "jotai"
+import React, { useState } from "react"
 
 const ConfigValueCol = () => {
   const { processConfig } = useConfig()
   const filteredSheet = processConfig().stripFirstNrRows().getValue()
 
-  const [selectSumCol, setSelectSumCol] = useState<number | null>(null)
+  const [selectSumCol, setSelectSumCol] = useAtom(selectSumColAtom)
+
   const [hoverPos, setHoverPos] = useState<number | null>(null)
 
   const getCellProps = (col: number) => {
@@ -42,7 +36,7 @@ const ConfigValueCol = () => {
         `,
       onMouseEnter: () => handleMouseIn(col),
       onMouseLeave: (e: any) => handleMouseOut(e),
-      onClick: () => setSelectSumCol((prev) => (prev === col ? null : col)),
+      onClick: () => setSelectSumCol(selectSumCol === col ? null : col),
     }
 
     return props
