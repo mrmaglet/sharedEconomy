@@ -1,5 +1,8 @@
 import React from "react"
-import { Select, SelectItem, Avatar } from "@nextui-org/react"
+import { Dropdown, Button, DropdownMenu, DropdownItem, DropdownTrigger } from "@nextui-org/react"
+import ListChecks from "@/icons/ListChecksIcon"
+import RowsIcon from "@/icons/RowsIcon"
+import { networkInterfaces } from "os"
 
 export const users = [
   {
@@ -208,22 +211,35 @@ const Filters = () => {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">Add filter +</Button>
+        <Button variant="solid" color="secondary">
+          Add filter +
+        </Button>
       </DropdownTrigger>
-      <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
+
+      <DropdownMenu
+        variant="faded"
+        aria-label="Dropdown menu with description"
+        itemClasses={{
+          description: ["whitespace-nowrap"],
+          // base: ["gap-5"],
+        }}
+      >
         <DropdownItem
           key="new"
           shortcut="⌘N"
           description="Create a new file"
-          startContent={<AddNoteIcon className={iconClasses} />}
+          // startContent={<RowsIcon style={{ width: "119px", height: "auto" }} />}
+          startContent={<RowsIcon />}
         >
           New file
         </DropdownItem>
+
         <DropdownItem
           key="copy"
           shortcut="⌘C"
           description="Copy the file link"
-          startContent={<CopyDocumentIcon className={iconClasses} />}
+          startContent={<ListChecks />}
+          // startContent={<ListChecks style={{ width: "119px", height: "auto" }} />}
         >
           Copy link
         </DropdownItem>
@@ -233,3 +249,17 @@ const Filters = () => {
 }
 
 export { Filters }
+
+// itemClasses={{
+//   base: [
+//     "rounded-md",
+//     "text-default-500",
+//     "transition-opacity",
+//     "data-[hover=true]:text-foreground",
+//     "data-[hover=true]:bg-default-100",
+//     "dark:data-[hover=true]:bg-default-50",
+//     "data-[selectable=true]:focus:bg-default-50",
+//     "data-[pressed=true]:opacity-70",
+//     "data-[focus-visible=true]:ring-default-500",
+//   ],
+// }}

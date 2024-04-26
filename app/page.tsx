@@ -25,8 +25,19 @@ const Page = () => {
       <div className="container my-10">
         <DropZone callback={onFileDropped} className="mb-8" />
 
+        <div className="absolute top-2 left-2 z-50">
+          <div className="flex min-w-40 bg-slate-400">
+            <div className="flex flex-row">
+              <div className="flex-1">Image</div>
+              <div className="flex">Some content goes beoynd its limits! </div>
+              <div className="flex">K </div>
+            </div>
+          </div>
+        </div>
+
         <Card className="p-10">
           <PersonInputs />
+
           <ShareResults />
         </Card>
 

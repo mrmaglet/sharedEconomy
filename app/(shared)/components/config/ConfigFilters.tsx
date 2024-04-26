@@ -1,16 +1,7 @@
 import { Filters } from "@/app/(shared)/components/config/Filters/Filters"
 import { useConfig } from "@/app/(shared)/lib/useConfig"
 import { RawSheetRow } from "@/types/types"
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Select,
-  SelectItem,
-} from "@nextui-org/react"
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import React from "react"
 
 const ConfigFilters = () => {
