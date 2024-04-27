@@ -5,43 +5,50 @@ import { RawSheet } from "@/types/types"
  */
 export type Configuration = {
   name: string
-  files: SheetFile[]
+  sheetConfigs: SheetConfig[]
 }
 
-export type SheetFile = {
+export type SheetConfig = {
   name: string
   file: RawSheet
+  header: number | undefined
+  valueColumn: number | null
   filters: Filter[]
 }
 
-type Filter =
-  | ({
-      header: number | undefined
-      valueColumn: number
-    } & ColumnFilter)
-  | MultiSelectFilter
+export type Filter = ColumnFilter | MultiSelectFilter
 
 // # Column filter
 type ColumnFilter = {
-  SelectType: {
-    selection: Extract<SelectType, "column">
-    description: string
-  }
+  selectType: Extract<SelectType, "column">
   column: number
-} & (TextFilter | SelectFilter | ActionDelete | ActionGroup)
+} & (TextFilter | (SelectFilter & (ActionDelete | ActionGroup)))
+
+// # Column filter BASE
+// type ColumnFilter = {
+//   selectType: Extract<SelectType, "column">
+//   column: number
+// } & (TextFilter | SelectFilter) &
+//   (ActionDelete | ActionGroup)
 
 type TextFilter = {
-  SelectType: {
-    selection: Extract<SelectType, "start-with" | "contains" | "end-with">
-    description: string
-  }
+  filterType: Extract<FilterType, "start-with" | "contains" | "end-with">
   filterText: string
 }
 
 type SelectFilter = {
   filterType: Extract<FilterType, "equals">
-  selectedRows: number[]
+  selectedRow: number
 }
+
+// # Multi select filter
+type MultiSelectFilter = {
+  selectType: Extract<SelectType, "multi-select">
+  selectedRows: number[]
+  type: "permanent-fixed" | "dynamically-hand-picked"
+} & (ActionDelete | ActionGroup)
+
+// # Helpers
 
 type ActionDelete = {
   action: Extract<FilterAction, "delete">
@@ -52,14 +59,6 @@ type ActionGroup = {
   groupName: string
 }
 
-// # Multi select filter
-type MultiSelectFilter = {
-  SelectType: Extract<SelectType, "multi-select">
-  selectedRows: number[]
-  type: "permanent-fixed" | "dynamically-hand-picked"
-}
-
-// # Helpers
 type SelectType = "column" | "multi-select"
 type FilterType = "start-with" | "contains" | "end-with" | "equals"
 type FilterAction = "group" | "delete"

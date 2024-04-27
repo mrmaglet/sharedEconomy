@@ -48,7 +48,7 @@ const ConfigValueCol = () => {
 
   return (
     <>
-      <h2>Select your value col. </h2>
+      <h2>Select your value col. {selectSumCol} </h2>
 
       <Table aria-label="Table">
         <TableHeader className="hidden">
