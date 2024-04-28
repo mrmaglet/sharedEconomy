@@ -3,18 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build  && touch docs/.nojekyll",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@nextui-org/react": "^2.2.10",
-    "next-themes": "^0.2.1",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.28",
     "jotai": "^2.7.1",
+    "jotai-devtools": "^0.9.1",
+    "jotai-optics": "^0.3.2",
     "next": "14.1.4",
+    "next-themes": "^0.2.1",
+    "optics-ts": "^2.4.1",
     "react": "^18",
     "react-dom": "^18",
     "tailwind-merge": "^2.2.2",

@@ -7,3 +7,9 @@ errors - check for the table length before rendering.
 ```ts
 if (tableData?.length === 0) return null
 ```
+
+# One if these packages removed the possibility to run nextjs --turbo.
+
+- "jotai-devtools"
+- "jotai-optics"
+- "optics-ts"

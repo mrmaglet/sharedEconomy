@@ -1,39 +1,33 @@
 "use client"
 
-import { useAtomValue, useSetAtom } from "jotai"
+import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { DropZone } from "@/app/components/common/drop-zone/DropZone"
 import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 import { ShareResults } from "@/app/(shared)/components/ShareResults"
-import { configAtom, sheetConfigAtom } from "@/app/(shared)/lib/store"
+import {
+  addSheetDataAtom,
+  configAtom,
+  focusBaseConfigAtom,
+  sheetConfigAtom,
+} from "@/app/(shared)/lib/store"
 import { Card } from "@nextui-org/react"
 import { Config } from "@/app/(shared)/components/config/Config"
 import { parseFirstSheetToJson } from "@/app/(shared)/lib/parseFirstSheetToJson"
+import { useAtomsDevtools } from "jotai-devtools"
 
 const Page = () => {
-  const sheetConfig = useSetAtom(sheetConfigAtom)
-  const currentSheet = useAtomValue(sheetConfigAtom)
+  const [focusBaseConfig, setFocusBaseConfig] = useAtom(focusBaseConfigAtom)
 
-  const configuration = useAtomValue(configAtom)
+  const addSheetData = useSetAtom(addSheetDataAtom)
 
-  configuration.name = "Name"
-  configuration.sheetConfigs = []
-  configuration.sheetConfigs[0].name = "Sheet 1"
-  configuration.sheetConfigs[0].filters[0].selectType = "column"
+  useAtomsDevtools("test")
 
-  if (configuration.sheetConfigs[0].filters[0].selectType === "column") {
-    configuration.sheetConfigs[0].filters[0].action = "group"
-
-    if (configuration.sheetConfigs[0].filters[0].action === "group") {
-      configuration.sheetConfigs[0].filters[0].groupName = "Group Name"
-    }
-  }
+  console.log(focusBaseConfig)
 
   const onFileDropped = (file: ArrayBuffer) => {
     const parsedFile = parseFirstSheetToJson(file)
 
-    if (parsedFile.success === false) alert("Failed to parse file!")
-
-    setRawSheet(parsedFile.data)
+    if (parsedFile !== null) addSheetData(parsedFile)
   }
 
   return (

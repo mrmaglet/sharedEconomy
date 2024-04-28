@@ -12,8 +12,8 @@ export const parseFirstSheetToJson = (file: ArrayBuffer) => {
 
     const data: RawSheet = utils.sheet_to_json(firstSheet, { header: 1, defval: "" })
 
-    return { success: true, data }
+    return data
   } catch (error) {
-    return { success: false, data: null }
+    return []
   }
 }
