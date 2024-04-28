@@ -22,14 +22,8 @@ export type Filter = ColumnFilter | MultiSelectFilter
 type ColumnFilter = {
   selectType: Extract<SelectType, "column">
   column: number
-} & (TextFilter | (SelectFilter & (ActionDelete | ActionGroup)))
-
-// # Column filter BASE
-// type ColumnFilter = {
-//   selectType: Extract<SelectType, "column">
-//   column: number
-// } & (TextFilter | SelectFilter) &
-//   (ActionDelete | ActionGroup)
+} & (TextFilter | SelectFilter) &
+  (ActionDelete | ActionGroup)
 
 type TextFilter = {
   filterType: Extract<FilterType, "start-with" | "contains" | "end-with">

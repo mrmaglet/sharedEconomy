@@ -2,19 +2,17 @@ import { Configuration, Filter, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { atom } from "jotai"
 
-export const rawSheetAtom = atom<RawSheet | null>(null)
+// export const rawSheetAtom = atom<RawSheet | null>(null)
+// export const headerRowAtom = atom<number | undefined>(undefined)
+// export const selectSumColAtom = atom<number | null>(null)
+// export const configNameAtom = atom<string>("")
 
-export const headerRowAtom = atom<number | undefined>(undefined)
-export const selectSumColAtom = atom<number | null>(null)
-export const configNameAtom = atom<string>("")
+export const currentSheetAtom = atom(0)
 
 export const configAtom = atom<Configuration>((get) => ({
-  name: get(configNameAtom),
+  name: "",
   sheetConfigs: get(sheetConfigAtom),
 }))
-
-// header: get(headerRowAtom),
-//   valueColumn: get(selectSumColAtom),
 
 export const sheetConfigAtom = atom<SheetConfig[]>((get) => [
   {
@@ -27,6 +25,11 @@ export const sheetConfigAtom = atom<SheetConfig[]>((get) => [
 ])
 
 export const filterAtom = atom<Filter[]>([])
+
+const defaultConfig: Configuration = {
+  name: "",
+  sheetConfigs: null,
+}
 
 const config: Configuration = {
   name: "",
@@ -49,5 +52,3 @@ const config: Configuration = {
     },
   ],
 }
-
-console.log(config)

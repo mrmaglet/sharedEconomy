@@ -4,13 +4,14 @@ import { useAtomValue, useSetAtom } from "jotai"
 import { DropZone } from "@/app/components/common/drop-zone/DropZone"
 import { PersonInputs } from "@/app/(shared)/components/PersonInputs/PersonInputs"
 import { ShareResults } from "@/app/(shared)/components/ShareResults"
-import { configAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
+import { configAtom, sheetConfigAtom } from "@/app/(shared)/lib/store"
 import { Card } from "@nextui-org/react"
 import { Config } from "@/app/(shared)/components/config/Config"
 import { parseFirstSheetToJson } from "@/app/(shared)/lib/parseFirstSheetToJson"
 
 const Page = () => {
-  const setRawSheet = useSetAtom(rawSheetAtom)
+  const sheetConfig = useSetAtom(sheetConfigAtom)
+  const currentSheet = useAtomValue(sheetConfigAtom)
 
   const configuration = useAtomValue(configAtom)
 
