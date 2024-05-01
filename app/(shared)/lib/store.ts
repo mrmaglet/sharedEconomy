@@ -1,13 +1,28 @@
 import { Configuration, Filter, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { atom } from "jotai"
+import { atomWithImmer } from "jotai-immer"
 import { focusAtom } from "jotai-optics"
+import { splitAtom } from "jotai/utils"
 import { unescape } from "querystring"
 
 export const rawSheetAtom = atom<RawSheet | null>(null)
 export const headerRowAtom = atom<number | undefined>(undefined)
 export const selectSumColAtom = atom<number | null>(null)
 export const configNameAtom = atom<string>("")
+
+const configAtom2 = atomWithImmer<Configuration>({
+  name: "",
+  sheetConfigs: [],
+})
+
+export const configSheetAtom = focusAtom(configAtom2, (optic) => optic.prop("sheetConfigs"))
+
+export const configSheetsAtomsAtom = splitAtom(configSheetAtom)
+
+export const addConfigSheetAtom = atom(null, (_get, set, sheetConfig: SheetConfig) => {
+  set(configSheetAtom, (prev) => [...prev, sheetConfig])
+})
 
 export const configAtom = atom<Configuration>((get) => ({
   name: "",
