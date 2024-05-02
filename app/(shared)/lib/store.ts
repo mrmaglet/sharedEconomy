@@ -17,8 +17,8 @@ export const activeSheetAtom = atom(0)
 
 export const presentConfigAtom = atom<Configuration>((get) => get(configAtom))
 
-const presentSheetConfigFocus = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
-export const presentSheetConfigAtom = atom<SheetConfig[]>((get) => get(presentSheetConfigFocus))
+const presentSheetsFocus = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
+export const presentSheetsAtom = atom<SheetConfig[]>((get) => get(presentSheetsFocus))
 
 export const configSheetAtom = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
 

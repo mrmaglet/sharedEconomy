@@ -1,9 +1,6 @@
 import {
   activeSheetAtom,
-  headerRowAtom,
-  presentConfigAtom,
-  presentSheetConfigAtom,
-  rawSheetAtom,
+  presentSheetsAtom,
   setConfigSheetHeaderAtom,
 } from "@/app/(shared)/lib/store"
 import { RawSheetRow } from "@/types/types"
@@ -11,12 +8,12 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from 
 import { useAtomValue, useSetAtom } from "jotai"
 
 const ConfigHeader = () => {
-  const presentSheetConfig = useAtomValue(presentSheetConfigAtom)
+  const presentSheets = useAtomValue(presentSheetsAtom)
   const activeSheet = useAtomValue(activeSheetAtom)
 
   const setConfigSheetHeader = useSetAtom(setConfigSheetHeaderAtom)
 
-  const tableHeaderRow = presentSheetConfig[activeSheet].sheetRows[0]
+  const tableHeaderRow = presentSheets[activeSheet].sheetRows[0]
 
   return (
     <>
@@ -36,7 +33,7 @@ const ConfigHeader = () => {
         </TableHeader>
 
         <TableBody>
-          {presentSheetConfig[activeSheet].sheetRows.map((row: RawSheetRow, i: number) => (
+          {presentSheets[activeSheet].sheetRows.map((row: RawSheetRow, i: number) => (
             <TableRow key={i}>
               {row.map((cell: string | number, j: number) => (
                 <TableCell key={`${i}-${j}`}>{cell}</TableCell>
