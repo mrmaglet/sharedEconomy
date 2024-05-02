@@ -1,16 +1,23 @@
-import { headerRowAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
+import {
+  activeSheetAtom,
+  headerRowAtom,
+  presentConfigAtom,
+  presentSheetConfigAtom,
+  rawSheetAtom,
+  setConfigSheetHeaderAtom,
+} from "@/app/(shared)/lib/store"
 import { RawSheetRow } from "@/types/types"
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react"
 import { useAtomValue, useSetAtom } from "jotai"
 
 const ConfigHeader = () => {
-  const rawSheet = useAtomValue(rawSheetAtom)
+  const presentSheetConfig = useAtomValue(presentSheetConfigAtom)
+  const activeSheet = useAtomValue(activeSheetAtom)
 
   const setHeaderRow = useSetAtom(headerRowAtom)
+  const setConfigSheetHeader = useSetAtom(setConfigSheetHeaderAtom)
 
-  if (!rawSheet) return
-
-  const headerRow = rawSheet?.[0]
+  const tableHeaderRow = presentSheetConfig[activeSheet].sheetRows[0]
 
   return (
     <>
@@ -21,16 +28,16 @@ const ConfigHeader = () => {
         hideHeader
         selectionMode="single"
         color="primary"
-        onSelectionChange={(e: any) => setHeaderRow(e.anchorKey)}
+        onSelectionChange={(e: any) => setConfigSheetHeader(e.anchorKey)}
       >
         <TableHeader className="hidden">
-          {headerRow.map((cell: string | number, i: number) => (
+          {tableHeaderRow.map((cell: string | number, i: number) => (
             <TableColumn key={i}>&nbsp;</TableColumn>
           ))}
         </TableHeader>
 
         <TableBody>
-          {rawSheet.map((row: RawSheetRow, i: number) => (
+          {presentSheetConfig[activeSheet].sheetRows.map((row: RawSheetRow, i: number) => (
             <TableRow key={i}>
               {row.map((cell: string | number, j: number) => (
                 <TableCell key={`${i}-${j}`}>{cell}</TableCell>

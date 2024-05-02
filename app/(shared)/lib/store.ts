@@ -1,84 +1,47 @@
-import { Configuration, Filter, SheetConfig } from "@/types/config-types"
+import { Configuration, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { atom } from "jotai"
-import { atomWithImmer } from "jotai-immer"
 import { focusAtom } from "jotai-optics"
-import { splitAtom } from "jotai/utils"
-import { unescape } from "querystring"
 
 export const rawSheetAtom = atom<RawSheet | null>(null)
 export const headerRowAtom = atom<number | undefined>(undefined)
 export const selectSumColAtom = atom<number | null>(null)
 export const configNameAtom = atom<string>("")
 
-const configAtom2 = atomWithImmer<Configuration>({
+const configAtom = atom<Configuration>({
   name: "",
   sheetConfigs: [],
 })
 
-export const configSheetAtom = focusAtom(configAtom2, (optic) => optic.prop("sheetConfigs"))
+export const activeSheetAtom = atom(0)
 
-export const configSheetsAtomsAtom = splitAtom(configSheetAtom)
+export const presentConfigAtom = atom<Configuration>((get) => get(configAtom))
 
-export const addConfigSheetAtom = atom(null, (_get, set, sheetConfig: SheetConfig) => {
-  set(configSheetAtom, (prev) => [...prev, sheetConfig])
+const presentSheetConfigFocus = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
+export const presentSheetConfigAtom = atom<SheetConfig[]>((get) => get(presentSheetConfigFocus))
+
+export const configSheetAtom = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
+
+export const addConfigSheetAtom = atom(null, (_get, set, sheetRows: RawSheet) => {
+  set(configSheetAtom, (prev) => [
+    ...prev,
+    { name: "", sheetRows, header: undefined, valueColumn: null, filters: [] },
+  ])
 })
 
-export const configAtom = atom<Configuration>((get) => ({
-  name: "",
-  sheetConfigs: get(sheetConfigAtom),
-}))
-
-export const sheetConfigAtom = atom<SheetConfig[]>((get) => [
-  {
-    name: "",
-    file: [],
-    header: undefined,
-    valueColumn: null,
-    filters: get(filterAtom),
-  },
-])
-
-export const filterAtom = atom<Filter[]>([])
-
-const defaultConfiguration: Configuration = {
-  name: "",
-  sheetConfigs: [
-    {
-      name: "",
-      file: [],
-      header: undefined,
-      valueColumn: null,
-      filters: [],
-    },
-  ],
-}
-
-const baseConfig = atom<Configuration>(defaultConfiguration)
-
-export const addSheetDataAtom = atom(null, (_get, set, sheetData: RawSheet) => {
-  const result = set(baseConfig, (prev) => {
-    const result = prev.sheetConfigs.map((sheetConfig) => {
-      return {
-        ...sheetConfig,
-        file: sheetData,
-      }
-    })
-
-    return { ...prev, sheetConfigs: result }
+export const setConfigSheetHeaderAtom = atom(null, (get, set, header: number) => {
+  set(configSheetAtom, (prev) => {
+    const sheetConfig = prev[get(activeSheetAtom)]
+    return [{ ...sheetConfig, header }]
   })
 })
-
-export const focusBaseConfigAtom = focusAtom(baseConfig, (optic) => optic.prop("sheetConfigs"))
-
-const defaultFilter = {}
 
 const config: Configuration = {
   name: "",
   sheetConfigs: [
     {
       name: "",
-      file: [],
+      sheetRows: [],
       header: 0,
       valueColumn: 0,
       filters: [

@@ -10,7 +10,7 @@ export type Configuration = {
 
 export type SheetConfig = {
   name: string
-  file: RawSheet
+  sheetRows: RawSheet
   header: number | undefined
   valueColumn: number | null
   filters: Filter[]
