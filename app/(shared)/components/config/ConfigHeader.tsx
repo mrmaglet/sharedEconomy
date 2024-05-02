@@ -14,7 +14,6 @@ const ConfigHeader = () => {
   const presentSheetConfig = useAtomValue(presentSheetConfigAtom)
   const activeSheet = useAtomValue(activeSheetAtom)
 
-  const setHeaderRow = useSetAtom(headerRowAtom)
   const setConfigSheetHeader = useSetAtom(setConfigSheetHeaderAtom)
 
   const tableHeaderRow = presentSheetConfig[activeSheet].sheetRows[0]
