@@ -1,13 +1,11 @@
-import { Transaction } from "@/types/types"
-
 /**
  * Total sum.
  * Rounded up to nearest int.
  */
-export const sumTransactions = (transactions: Transaction[]) => {
+export const sumTransactions = (transactions: any) => {
   const totals = (
     Math.round(
-      transactions.reduce((acc, transaction) => {
+      transactions.reduce((acc: any, transaction: any) => {
         return (acc += transaction.amount)
       }, 0) * 100
     ) / 100

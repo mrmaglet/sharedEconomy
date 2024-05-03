@@ -5,6 +5,7 @@ import { useState } from "react"
  * Pass a tulp as an argument. Pass an union type of the tulp as a generic.
  *
  * const steps = ["Name", "Details", "Confirm"] as const
+ *
  * const wizard = useWizard<(typeof steps)[number]>(steps)
  */
 const useWizard = <T>(list: readonly T[]) => {

@@ -1,10 +1,69 @@
+import { Configuration, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { atom } from "jotai"
+import { focusAtom } from "jotai-optics"
 
 export const rawSheetAtom = atom<RawSheet | null>(null)
-
 export const headerRowAtom = atom<number | undefined>(undefined)
+export const selectSumColAtom = atom<number | null>(null)
+export const configNameAtom = atom<string>("")
 
-export const configAtom = atom((get) => ({
-  header: get(headerRowAtom),
-}))
+const configAtom = atom<Configuration>({
+  name: "",
+  sheetConfigs: [],
+})
+
+export const activeSheetAtom = atom(0)
+
+export const presentConfigAtom = atom<Configuration>((get) => get(configAtom))
+
+const presentSheetsFocus = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
+export const presentSheetsAtom = atom<SheetConfig[]>((get) => get(presentSheetsFocus))
+
+export const configSheetAtom = focusAtom(configAtom, (optic) => optic.prop("sheetConfigs"))
+
+export const addConfigSheetAtom = atom(null, (_get, set, sheetRows: RawSheet) => {
+  set(configSheetAtom, (prev) => [
+    ...prev,
+    { name: "", sheetRows, header: undefined, valueColumn: null, filters: [] },
+  ])
+})
+
+export const setConfigSheetHeaderAtom = atom(null, (get, set, header: SheetConfig["header"]) => {
+  set(configSheetAtom, (prev) => {
+    const sheetConfig = prev[get(activeSheetAtom)]
+    return [{ ...sheetConfig, header }]
+  })
+})
+
+export const configSheetValueColAtom = atom(
+  (get) => get(configSheetAtom)[get(activeSheetAtom)].valueColumn,
+  (get, set, valueColumn: SheetConfig["valueColumn"]) => {
+    set(configSheetAtom, (prev) => {
+      const sheetConfig = prev[get(activeSheetAtom)]
+      return [{ ...sheetConfig, valueColumn }]
+    })
+  }
+)
+
+const config: Configuration = {
+  name: "",
+  sheetConfigs: [
+    {
+      name: "",
+      sheetRows: [],
+      header: 0,
+      valueColumn: 0,
+      filters: [
+        {
+          selectType: "column",
+          column: 0,
+          filterType: "start-with",
+          filterText: "",
+          action: "group",
+          groupName: "",
+        },
+      ],
+    },
+  ],
+}
