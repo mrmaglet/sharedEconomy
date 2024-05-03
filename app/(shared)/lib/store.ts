@@ -29,12 +29,22 @@ export const addConfigSheetAtom = atom(null, (_get, set, sheetRows: RawSheet) =>
   ])
 })
 
-export const setConfigSheetHeaderAtom = atom(null, (get, set, header: number) => {
+export const setConfigSheetHeaderAtom = atom(null, (get, set, header: SheetConfig["header"]) => {
   set(configSheetAtom, (prev) => {
     const sheetConfig = prev[get(activeSheetAtom)]
     return [{ ...sheetConfig, header }]
   })
 })
+
+export const configSheetValueColAtom = atom(
+  (get) => get(configSheetAtom)[get(activeSheetAtom)].valueColumn,
+  (get, set, valueColumn: SheetConfig["valueColumn"]) => {
+    set(configSheetAtom, (prev) => {
+      const sheetConfig = prev[get(activeSheetAtom)]
+      return [{ ...sheetConfig, valueColumn }]
+    })
+  }
+)
 
 const config: Configuration = {
   name: "",

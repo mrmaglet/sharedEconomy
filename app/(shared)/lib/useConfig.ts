@@ -1,4 +1,4 @@
-import { configAtom, rawSheetAtom } from "@/app/(shared)/lib/store"
+import { Configuration, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { useAtomValue } from "jotai"
 import { Config } from "tailwindcss"
@@ -8,12 +8,9 @@ type ConfigProcessor = {
   getValue: () => RawSheet
 }
 
-const useConfig = () => {
-  const rawSheet = useAtomValue(rawSheetAtom)
-  const config = useAtomValue(configAtom)
-
+const useConfig = (config: SheetConfig) => {
   function processConfig(): ConfigProcessor {
-    let value: RawSheet = rawSheet || []
+    let value: RawSheet = config.sheetRows
 
     /**
      * Strips everything before the defined header row.

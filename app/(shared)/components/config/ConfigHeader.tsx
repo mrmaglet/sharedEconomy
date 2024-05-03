@@ -13,7 +13,7 @@ const ConfigHeader = () => {
 
   const setConfigSheetHeader = useSetAtom(setConfigSheetHeaderAtom)
 
-  const tableHeaderRow = presentSheets[activeSheet].sheetRows[0]
+  const tableHeaderRow = presentSheets[activeSheet].sheetRows?.[0] || []
 
   return (
     <>
