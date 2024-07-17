@@ -1,4 +1,5 @@
 import { RawSheet } from "@/types/types"
+import { KeyValuePair } from "tailwindcss/types/config"
 
 /**
  * Configure filters and settings for a dropped file.
@@ -53,6 +54,11 @@ type ActionGroup = {
   groupName: string
 }
 
-type SelectType = "column" | "multi-select"
+export const SELECT_TYPE = {
+  column: "column",
+  multiSelect: "multi-select",
+} as const
+
+export type SelectType = keyof typeof SELECT_TYPE
 type FilterType = "start-with" | "contains" | "end-with" | "equals"
 type FilterAction = "group" | "delete"

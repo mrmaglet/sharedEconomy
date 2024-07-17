@@ -1,9 +1,21 @@
-import React from "react"
-import { Dropdown, Button, DropdownMenu, DropdownItem, DropdownTrigger } from "@nextui-org/react"
+import React, { Key, PropsWithChildren } from "react"
+import {
+  Dropdown,
+  Button,
+  DropdownMenu,
+  DropdownItem,
+  DropdownTrigger,
+  DropdownMenuProps,
+} from "@nextui-org/react"
 import ListChecks from "@/icons/ListChecksIcon"
 import RowsIcon from "@/icons/RowsIcon"
+import { useSetAtom } from "jotai"
+import { setConfigSelectTypeAtom } from "@/app/(shared)/lib/store"
+import { SelectType, SELECT_TYPE } from "@/types/config-types"
 
 const AddFilterDropDown = () => {
+  const setConfigSelectType = useSetAtom(setConfigSelectTypeAtom)
+
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -13,6 +25,9 @@ const AddFilterDropDown = () => {
       </DropdownTrigger>
 
       <DropdownMenu
+        onAction={(e) => {
+          setConfigSelectType(e as SelectType)
+        }}
         variant="faded"
         aria-label="Dropdown menu with description"
         itemClasses={{
@@ -20,7 +35,7 @@ const AddFilterDropDown = () => {
         }}
       >
         <DropdownItem
-          key="new"
+          key={SELECT_TYPE.column}
           shortcut="⌘N"
           description={
             <>
@@ -33,7 +48,7 @@ const AddFilterDropDown = () => {
         </DropdownItem>
 
         <DropdownItem
-          key="copy"
+          key={SELECT_TYPE.multiSelect}
           shortcut="⌘C"
           description="Multiselect individual rows"
           startContent={<ListChecks style={{ width: "96px", height: "auto", color: "silver" }} />}

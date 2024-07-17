@@ -1,4 +1,4 @@
-import { Configuration, SheetConfig } from "@/types/config-types"
+import { Configuration, Filter, SelectType, SheetConfig } from "@/types/config-types"
 import { RawSheet } from "@/types/types"
 import { atom } from "jotai"
 import { focusAtom } from "jotai-optics"
@@ -45,6 +45,88 @@ export const configSheetValueColAtom = atom(
     })
   }
 )
+
+export const setConfigSelectTypeAtom = atom(null, (get, set, selectType: SelectType) => {
+  set(configSheetAtom, (prev) => {
+    const sheetConfig = prev[get(activeSheetAtom)]
+    const { filters } = sheetConfig
+
+    if (selectType === "column") {
+      return [
+        {
+          ...sheetConfig,
+          filters: [
+            ...filters,
+            {
+              selectType,
+              column: 0,
+              filterType: "start-with",
+              filterText: "",
+              action: "group",
+              groupName: "",
+            },
+          ],
+        },
+      ]
+    } else if (selectType === "multi-select") {
+      return [
+        {
+          ...sheetConfig,
+          filters: [
+            ...filters,
+            {
+              selectType,
+              selectedRows: [],
+              type: "permanent-fixed",
+              action: "group",
+              groupName: "",
+            },
+          ],
+        },
+      ]
+    }
+  })
+})
+
+const test: Configuration = {
+  name: "",
+  sheetConfigs: [],
+}
+
+const test2: Configuration = {
+  name: "",
+  sheetConfigs: [
+    {
+      name: "",
+      sheetRows: [],
+      header: undefined,
+      valueColumn: 8,
+      filters: [],
+    },
+  ],
+}
+
+const test3: Configuration = {
+  name: "",
+  sheetConfigs: [
+    {
+      name: "",
+      sheetRows: [],
+      header: undefined,
+      valueColumn: 8,
+      filters: [
+        {
+          selectType: "column",
+          column: 0,
+          filterType: "equals",
+          selectedRow: 0,
+          action: "group",
+          groupName: "",
+        },
+      ],
+    },
+  ],
+}
 
 const config: Configuration = {
   name: "",
